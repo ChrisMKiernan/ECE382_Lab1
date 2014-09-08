@@ -24,16 +24,29 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 			mov		#0xc000, r5
 			mov		#0x0200, r6
 			mov.b	@r5+, r8
-start
+start										; Loads the operation code then decides which loop to jump to
 			mov.b	@r5+, r9
-			cmp		#0x22, r9
+			cmp		#0x11, r9
 			jz		addingLoop
+			cmp		#0x22, r9
+			jz		subLoop
+			cmp		#0x44, r9
+			jz		clrLoop
 			jmp		trap
 
 addingLoop
 			mov.b	@r5+, r7
 			add		r7, r8
 			mov.b	r8, 0(r6)
+			inc.b	r6
+			jmp		start
+
+subLoop
+			mov.b	@r5+, r7
+			sub		r8, r7
+			mov.b	r7, r8
+			mov.b	r8, 0(r6)
+			inc.b	r6
 			jmp		start
 
 trap
