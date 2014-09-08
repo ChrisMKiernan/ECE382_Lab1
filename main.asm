@@ -7,6 +7,7 @@
 
 ;-------------------------------------------------------------------------------
             .text                           ; Assemble into program memory
+myProgram:	.byte	0x13,0x22,0x14,0x55
             .retain                         ; Override ELF conditional linking
                                             ; and retain current section
             .retainrefs                     ; Additionally retain any sections
@@ -20,7 +21,7 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
                                             ; Main loop here
 ;-------------------------------------------------------------------------------
 
-			mov		#0x____, r5
+			mov		#0xc000, r5
 			mov		#0x0200, r6
 			mov.b	@r5+, r8
 start
@@ -33,7 +34,6 @@ addingLoop
 			mov.b	@r5+, r7
 			add		r7, r8
 			mov.b	r8, 0(r6)
-			mov.b	@r5+, r7
 			jmp		start
 
 trap
