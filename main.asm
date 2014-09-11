@@ -38,7 +38,7 @@ addingLoop									; Loads the value after the operation code, then adds the 2 n
 			mov.b	@r5+, r7
 			add		r7, r8
 			mov.b	r8, 0(r6)
-			inc.b	r6
+			inc		r6
 			jmp		start
 
 subLoop										; Loads the value after the operation code, then subtracts the 2 values and stored the final value
@@ -46,14 +46,14 @@ subLoop										; Loads the value after the operation code, then subtracts the 
 			sub		r8, r7
 			mov.b	r7, r8					; The reason for this move is to keep r8 consistently the final value
 			mov.b	r8, 0(r6)
-			inc.b	r6
+			inc		r6
 			jmp		start
 
 clrLoop
 			mov.b	#0x00, r8				; This move keeps r8 consistent as the final value
 			mov.b	r8, 0(r6)
-			inc.b	r6
-			inc.b	r5
+			inc		r6
+			inc		r5
 			mov.b	@r5, r8					; This move is placed here because if the value is not 0x55 (halt) then it will be the new starting value
 			cmp		#0x55, r8
 			jz		trap
