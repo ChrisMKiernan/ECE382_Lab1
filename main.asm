@@ -7,7 +7,7 @@
 
 ;-------------------------------------------------------------------------------
             .text                           ; Assemble into program memory
-myProgram:	.byte	0x13,0x22,0x14,0x55
+myProgram:	.byte	0x11, 0x11, 0x11, 0x11, 0x11, 0x44, 0x22, 0x22, 0x22, 0x11, 0xCC, 0x55
             .retain                         ; Override ELF conditional linking
                                             ; and retain current section
             .retainrefs                     ; Additionally retain any sections
