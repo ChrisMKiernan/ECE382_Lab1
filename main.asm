@@ -7,7 +7,7 @@
 
 ;-------------------------------------------------------------------------------
             .text                           ; Assemble into program memory
-myProgram:	.byte	0x11, 0x11, 0x11, 0x11, 0x11, 0x44, 0x22, 0x22, 0x22, 0x11, 0xCC, 0x55
+myProgram:	.byte	0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xAA, 0x11, 0xAA
             .retain                         ; Override ELF conditional linking
                                             ; and retain current section
             .retainrefs                     ; Additionally retain any sections
@@ -67,8 +67,8 @@ clrLoop
 			jmp		start
 
 errorCheck
-			jc		tooHigh
 			jn		tooLow
+			jc		tooHigh
 			mov.b	r8, 0(r6)
 			inc		r6
 			jmp		start
